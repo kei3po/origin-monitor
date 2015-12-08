@@ -1,0 +1,21 @@
+{
+  "name": "origin-monitor",
+  "version": "0.0.1",
+  "description": "monitors the origin servers of CNN.com",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kei3po/origin-monitor.git"
+  },
+  "author": "keith nielsen",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kei3po/origin-monitor/issues"
+  },
+  "homepage": "https://github.com/kei3po/origin-monitor#readme",
+  "dependencies": {
+  }
+}
