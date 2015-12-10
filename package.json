@@ -17,5 +17,6 @@
   },
   "homepage": "https://github.com/kei3po/origin-monitor#readme",
   "dependencies": {
+    "console-stamp": "^0.2.0"
   }
 }
