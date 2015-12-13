@@ -12,10 +12,12 @@ setInterval(function() {
         var request = url.parse('http://' + entry, true, true);
         request['agent'] = false;
 
+	//console.log(util.inspect(request, false, null));
+
         http.get(request, function(res) {
             res.setEncoding('UTF-8');
             res.on('data', function(chunk) {
-                var matches = chunk.match('<meta content="([^"]+)" name="lastmod">');
+                var matches = chunk.match('"publishDate":"([^"]+)"');
                 if (matches !== null) {
                     if (timestamps.hasOwnProperty(request.host)) {
                         if (timestamps[request.host] != matches[1]) {
@@ -37,6 +39,6 @@ setInterval(function() {
         console.log('-----');
         changed = false;
     }
-}, 5000);
+}, 1000);
 
 
