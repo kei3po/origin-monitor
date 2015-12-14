@@ -12,23 +12,23 @@ setInterval(function() {
         var request = url.parse('http://' + entry, true, true);
         request['agent'] = false;
 
-	//console.log(util.inspect(request, false, null));
-
         http.get(request, function(res) {
+            var data = "";
             res.setEncoding('UTF-8');
             res.on('data', function(chunk) {
-                var matches = chunk.match('"publishDate":"([^"]+)"');
-                if (matches !== null) {
-                    if (timestamps.hasOwnProperty(request.host)) {
-                        if (timestamps[request.host] != matches[1]) {
-                            timestamps[request.host] = matches[1];
-                            console.log('url: ' + request.host + ' new timestamp:' + timestamps[request.host]);
-                            changed = true;
-                        }
-                    }else {
-                        timestamps[request.host] = matches[1];
-                        console.log('initial timestamp ' + 'url: ' + request.host + ' ' + timestamps[request.host]);
+                data += chunk;
+            });
+            res.on('end', function() {
+                var publishDate = JSON.parse(data).lastPublishDate;
+                if (timestamps.hasOwnProperty(request.host)) {
+                    if (timestamps[request.host] != publishDate) {
+                        timestamps[request.host] = publishDate;
+                        console.log('url: ' + request.host + ' new timestamp:' + timestamps[request.host]);
+                        changed = true;
                     }
+                }else {
+                    timestamps[request.host] = publishDate;
+                    console.log('initial timestamp ' + 'url: ' + request.host + ' ' + timestamps[request.host]);
                 }
             });
         }).on('error', function(err) {
